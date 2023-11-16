@@ -1,0 +1,28 @@
+{% extends "src/_includes/base.njk" %} <!-- Path to your base layout -->
+
+{% block title %}Home - My Convention{% endblock %}
+
+{% block content %}
+    <div class="relative">
+        {% image "src/assets/roseandboard.png", "Rose and Board", "100vw", "w-full" %}
+        <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-start items-center">
+        <!-- Positioning and styling for the overlay -->
+        <div class="bg-white bg-opacity-70 p-4 max-w-lg">
+            <h1 class="text-5xl">US Go Congress 2024</h1>
+            <p>Planning for the 40th Us Go Congress has commenced! If you would like to help organzie the 2024 Congerss in Portland, we have lots of things you can do to help.</p>
+            <button class="px-4 py-2 bg-agagreen text-white">Find Out More</button>
+        </div>
+        </div>
+    </div>
+
+        <!-- Tailwind CSS can be used here for styling -->
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold underline">
+            Welcome to Our Convention!
+        </h1>
+        <p class="mt-4">
+            This is the home page of our convention website. Here you can find information about the event, schedules, speakers, and more.
+        </p>
+        <!-- More content here -->
+    </div>
+{% endblock %}

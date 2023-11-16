@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css"> <!-- Adjust the path as needed -->
+</head>
+<body>
+    <header>
+        <!-- Header content here -->
+        <nav class="flex justify-between h-20 bg-agablue">
+
+            {% image "src/assets/aga-logo.png", "AGA Logo", "100vw", "hidden md:block h-full w-auto" %}
+            {% image "src/assets/portland-go-congress-logo.png", "Congress Logo", "100vw", "h-full w-auto object-cover" %}
+            <div class="text-white flex">
+                <div class="flex flex-col justify-center">
+                    <div>July 13-31</div>
+                    <div>Portland, Oregon</div>
+                </div>
+            <button class="text-black px-4 py-2 my-4 mx-2 bg-agayellow">Register</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Main content will be injected here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+</body>
+</html>

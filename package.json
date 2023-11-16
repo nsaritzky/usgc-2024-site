@@ -1,0 +1,28 @@
+{
+  "name": "usgo-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run watch:eleventy\" \"npm run watch:tailwind\"",
+    "build": "npm run build:tailwind && eleventy",
+    "build:tailwind": "tailwindcss -i ./src/assets/css/tailwind.css -o ./_site/assets/css/styles.css --minify",
+    "watch:tailwind": "tailwindcss -i ./src/assets/css/tailwind.css -o ./_site/assets/css/styles.css --watch",
+    "watch:eleventy": "eleventy --serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-img": "^3.1.8",
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.5"
+  },
+  "dependencies": {
+    "-": "^0.0.1"
+  }
+}
