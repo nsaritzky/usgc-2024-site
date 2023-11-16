@@ -1,8 +1,10 @@
 const Image = require("@11ty/eleventy-img");
+const { format } = require("date-fns");
 
 module.exports = function (eleventyConfig) {
   // Copy `assets/` to `_site/assets/`
   // eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/admin");
 
   // Watch CSS files for changes
   eleventyConfig.setServerOptions({
@@ -10,14 +12,19 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addCollection("blog", function (collectionApi) {
-    return collectionApi.getFilteredByTag("post");
+    return collectionApi.getFilteredByTag("post").reverse();
+  });
+
+  eleventyConfig.addFilter("dateReadable", function (date) {
+    // Format the date to a readable format, e.g., "March 1, 2023"
+    return format(new Date(date), "MMMM d, yyyy");
   });
 
   eleventyConfig.addNunjucksAsyncShortcode(
     "image",
     async function (src, alt, sizes = "100vw", additionalClasses = "") {
       let metadata = await Image(src, {
-        widths: [300, 600],
+        widths: [300, 600, 1200],
         formats: ["avif", "jpeg"],
         outputDir: "./_site/assets/images/",
         urlPath: "/assets/images/",

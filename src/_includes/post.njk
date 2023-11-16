@@ -1,8 +1,15 @@
----
-layout: base.njk
----
-<article>
-  <h1>{{ title }}</h1>
-  <time datetime="{{ date }}">{{ date | dateReadable }}</time>
-  {{ content | safe }}
+{% extends "base.njk" %} {# Extends a base layout, if you have one #}
+
+{% block content %}
+<article class="max-w-2xl mx-auto mt-8 mb-16">
+    <header class="mb-4">
+        <h1 class="font-bold text-gray-900">{{ title }}</h1>
+        <time class="block text-gray-600" datetime="{{ date }}">{{ date | dateReadable }}</time>
+    </header>
+
+    <div class="prose lg:prose-xl">
+      {{ content | safe }}
+    </div>
 </article>
+
+{% endblock %}

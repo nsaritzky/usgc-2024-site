@@ -1,8 +1,10 @@
---
+---
+layout: post
 title: "First Post"
+author: Nathan Saritzky
 date: 2023-11-16
-tags: ['post']
---
+tags: ["post"]
+---
 
 # Document Title
 

@@ -2,6 +2,10 @@
 
 {% block title %}Home - My Convention{% endblock %}
 
+{% block head %}
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+{% endblock %}
+
 {% block content %}
     <div class="relative">
         {% image "src/assets/roseandboard.png", "Rose and Board", "100vw", "w-full" %}
@@ -14,15 +18,33 @@
         </div>
         </div>
     </div>
+    <div class="h-20 bg-agablue">
 
-        <!-- Tailwind CSS can be used here for styling -->
-    <div class="container mx-auto px-4">
-        <h1 class="text-3xl font-bold underline">
-            Welcome to Our Convention!
-        </h1>
-        <p class="mt-4">
-            This is the home page of our convention website. Here you can find information about the event, schedules, speakers, and more.
-        </p>
-        <!-- More content here -->
     </div>
+    {% set latestPost = collections.blog[0] %}
+
+<section class="bg-gray-100 p-4 md:p-6 rounded-lg shadow">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Latest Blog Post</h2>
+    <article class="bg-white p-4 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold mb-2">
+            <a href="{{ latestPost.url }}" class="text-blue-600 hover:text-blue-800">{{ latestPost.data.title }}</a>
+        </h3>
+        <p class="text-sm text-gray-600 mb-4">Published on {{ latestPost.date | dateReadable }}</p>
+        <p class="text-gray-700 mb-4">{{ latestPost.templateContent | safe | truncate(150) }}</p>
+        <a href="{{ latestPost.url }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Read more...
+        </a>
+    </article>
+</section>
+<script>
+ if (window.netlifyIdentity) {
+     window.netlifyIdentity.on("init", user => {
+         if (!user) {
+             window.netlifyIdentity.on("login", () => {
+                 document.location.href = "/admin/";
+             });
+         }
+     });
+ }
+</script>
 {% endblock %}
