@@ -5,7 +5,7 @@ async function imageMetadata() {
     widths: [300, 600, 900, 1200],
     formats: ["avif", "jpeg"],
     outputDir: "./_site/assets/images",
-    urlPath: "usgc-2024-site/assets/images",
+    urlPath: "/usgc-2024-site/assets/images",
   });
 
   return metadata;
