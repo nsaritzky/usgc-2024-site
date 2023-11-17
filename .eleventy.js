@@ -1,11 +1,13 @@
 const Image = require("@11ty/eleventy-img");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const { format } = require("date-fns");
+const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 
 module.exports = function (eleventyConfig) {
   // Copy `assets/` to `_site/assets/`
   // eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 
   eleventyConfig.addPassthroughCopy("src/admin");
 
@@ -63,6 +65,7 @@ module.exports = function (eleventyConfig) {
       output: "_site", // Output directory
       includes: "_includes", // Includes directory for layouts/partials
       data: "_data", // Data directory for global data files
+      pathPrefix: "usgc-2024-site", // Prefix for all links. If you deploy to example.com/portfolio/, use "/portfolio/"
     },
   };
 };
