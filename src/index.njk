@@ -2,10 +2,6 @@
 
 {% block title %}Home - My Convention{% endblock %}
 
-{% block head %}
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-{% endblock %}
-
 {% block content %}
     <div class="relative">
         {#% image "src/assets/roseandboard.png", "Rose and Board", "100vw", "w-full" %#}
@@ -98,15 +94,5 @@
          window.addEventListener('resize', setBackgroundImage); // Adjust background image on window resize
      });
     </script>
-    <script>
-     if (window.netlifyIdentity) {
-         window.netlifyIdentity.on("init", user => {
-             if (!user) {
-                 window.netlifyIdentity.on("login", () => {
-                     document.location.href = "/admin/";
-                 });
-             }
-         });
-     }
-    </script>
+
 {% endblock %}
