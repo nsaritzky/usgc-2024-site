@@ -9,8 +9,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 
-  eleventyConfig.addPassthroughCopy("src/admin");
-
   // Watch CSS files for changes
   eleventyConfig.setServerOptions({
     watch: ["_site/assets/**/*.css"],
@@ -65,7 +63,7 @@ module.exports = function (eleventyConfig) {
       output: "_site", // Output directory
       includes: "_includes", // Includes directory for layouts/partials
       data: "_data", // Data directory for global data files
-      pathPrefix: "usgc-2024-site", // Prefix for all links. If you deploy to example.com/portfolio/, use "/portfolio/"
     },
+    pathPrefix: "usgc-2024-site", // Prefix for all links. If you deploy to example.com/portfolio/, use "/portfolio/"
   };
 };
