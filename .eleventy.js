@@ -1,9 +1,12 @@
 const Image = require("@11ty/eleventy-img");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 const { format } = require("date-fns");
 
 module.exports = function (eleventyConfig) {
   // Copy `assets/` to `_site/assets/`
   // eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPlugin(pluginRss);
+
   eleventyConfig.addPassthroughCopy("src/admin");
 
   // Watch CSS files for changes
@@ -37,9 +40,20 @@ module.exports = function (eleventyConfig) {
         decoding: "async",
         class: additionalClasses,
       };
-
       // Generate HTML here...
       return Image.generateHTML(metadata, imageAttributes);
+    },
+  );
+
+  eleventyConfig.addNunjucksAsyncShortcode(
+    "responsiveImage",
+    async (src, alt, className) => {
+      let metadata = await Image(src, {
+        widths: [300, 600, 900, 1200],
+        formats: ["webp", "jpeg"],
+        outputDir: "./_site/img/",
+      });
+      return JSON.stringify(metadata);
     },
   );
 

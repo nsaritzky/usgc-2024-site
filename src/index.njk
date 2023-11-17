@@ -8,8 +8,8 @@
 
 {% block content %}
     <div class="relative">
-        {% image "src/assets/roseandboard.png", "Rose and Board", "100vw", "w-full" %}
-        <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-start items-center">
+        {#% image "src/assets/roseandboard.png", "Rose and Board", "100vw", "w-full" %#}
+        <div id="rose-image-container" class="relative bg-cover bg-right sm:py-8 lg:py-16">
         <!-- Positioning and styling for the overlay -->
         <div class="bg-white bg-opacity-70 p-4 max-w-lg">
             <h1 class="text-5xl">US Go Congress 2024</h1>
@@ -34,28 +34,79 @@
         </div>
     </Section>
     <div class="h-10 bg-agablue"></div>
-    <div class="relative">
-    {% image "src/assets/images/portland-photo.jpg", "Photo of Portland", "100vw", "w-full" %}
-        <div class="absolute top-0 left-0 right-0 bottom-0">
-            <div class="mt-2 ml-2 italic font-bold text-3xl text-white">Portland, the City of Roses</div>
+    <div id="portland-image-container" class="relative bg-cover bg-center">
+    {#% image "src/assets/images/portland-photo.jpg", "Photo of Portland", "100vw", "h-full w-full object-cover" %#}
+        <!-- <div class="absolute top-0 left-0 bg-opacity-50 right-0 bottom-0"> -->
+            <div class=" ml-2 italic font-bold text-3xl text-white">Portland, the City of Roses</div>
             <div class="flex w-full justify-end">
 
-            <div class="bg-white bg-opacity-70 p-4 mr-8 mt-24  max-w-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum pulvinar etiam non quam lacus suspendisse faucibus. Habitasse platea dictumst quisque sagittis. Tincidunt arcu non sodales neque sodales ut etiam sit amet. Non curabitur gravida arcu ac tortor dignissim convallis. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien. At varius vel pharetra vel turpis nunc eget lorem dolor. Laoreet non curabitur gravida arcu ac tortor dignissim. Ut diam quam nulla porttitor massa id.
+            <div class="bg-white mb-4 bg-opacity-70 p-4 sm:mr-8 mt-24  max-w-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum pulvinar etiam non quam lacus suspendisse faucibus. Habitasse platea dictumst quisque sagittis. Tincidunt arcu non sodales neque sodales ut etiam sit amet. Non curabitur gravida arcu ac tortor dignissim convallis. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien. At varius vel pharetra vel turpis nunc eget lorem dolor. Laoreet non curabitur gravida arcu ac tortor dignissim. Ut diam quam nulla porttitor massa id. <br>
                 <button class="px-4 py-2 bg-agared text-white">Check it Out</button>
-            </div>
+                <!-- </div> -->
             </div>
 
         </div>
     </div>
-<script>
- if (window.netlifyIdentity) {
-     window.netlifyIdentity.on("init", user => {
-         if (!user) {
-             window.netlifyIdentity.on("login", () => {
-                 document.location.href = "/admin/";
-             });
+
+    <script>
+     document.addEventListener('DOMContentLoaded', function() {
+         const imageMetadata = {{ portlandPhotoData | dump | safe }};
+         const container = document.getElementById('portland-image-container');
+
+         function setBackgroundImage() {
+             const screenWidth = window.innerWidth;
+             let selectedImageUrl = '';
+
+             // Example logic to pick the best image URL
+             if (screenWidth < 600) {
+                 selectedImageUrl = imageMetadata.jpeg[0].url; // Smallest image for small screens
+             } else if (screenWidth < 1200) {
+                 selectedImageUrl = imageMetadata.jpeg[1].url; // Medium image for medium screens
+             } else {
+                 selectedImageUrl = imageMetadata.jpeg[imageMetadata.jpeg.length - 1].url; // Largest image for large screens
+             }
+
+             container.style.backgroundImage = `url(${selectedImageUrl})`;
          }
+
+         setBackgroundImage();
+         window.addEventListener('resize', setBackgroundImage); // Adjust background image on window resize
      });
- }
-</script>
+    </script>
+    <script>
+     document.addEventListener('DOMContentLoaded', function() {
+         const imageMetadata = {{ rosePhotoData | dump | safe }};
+         const container = document.getElementById('rose-image-container');
+
+         function setBackgroundImage() {
+             const screenWidth = window.innerWidth;
+             let selectedImageUrl = '';
+
+             // Example logic to pick the best image URL
+             if (screenWidth < 600) {
+                 selectedImageUrl = imageMetadata.jpeg[0].url; // Smallest image for small screens
+             } else if (screenWidth < 1200) {
+                 selectedImageUrl = imageMetadata.jpeg[1].url; // Medium image for medium screens
+             } else {
+                 selectedImageUrl = imageMetadata.jpeg[imageMetadata.jpeg.length - 1].url; // Largest image for large screens
+             }
+
+             container.style.backgroundImage = `url(${selectedImageUrl})`;
+         }
+
+         setBackgroundImage();
+         window.addEventListener('resize', setBackgroundImage); // Adjust background image on window resize
+     });
+    </script>
+    <script>
+     if (window.netlifyIdentity) {
+         window.netlifyIdentity.on("init", user => {
+             if (!user) {
+                 window.netlifyIdentity.on("login", () => {
+                     document.location.href = "/admin/";
+                 });
+             }
+         });
+     }
+    </script>
 {% endblock %}
